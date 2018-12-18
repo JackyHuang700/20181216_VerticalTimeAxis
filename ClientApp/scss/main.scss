@@ -1,0 +1,486 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2016 OA Wu Design
+ */
+
+// @include font-face("icomoon", font-files("icomoon/icomoon.eot", "icomoon/icomoon.woff", "icomoon/icomoon.ttf", "icomoon/icomoon.svg"));
+// [class^="icon-"], [class*=" icon-"] {
+//   font-family: 'icomoon', Roboto,RobotoDraft,Helvetica,Arial,sans-serif,"微軟正黑體", "Microsoft JhengHei"; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1;
+//   @include font-smoothing(antialiased);
+// }
+
+@import "./_oa/_oa";
+
+@mixin nth_child_2n3_content {
+    float: right;
+    /*箭頭*/
+    &:after,
+    &:before {
+        right: 100%;
+        top: 19px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    &:after {
+        border-color: transparent;
+        border-right-color: rgba(255, 255, 255, 1.0);
+        border-width: #{$arrow_size};
+        margin-top: -#{$arrow_size};
+    }
+    &:before {
+        border-color: transparent;
+        border-right-color: rgba(200, 200, 200, 1.0);
+        border-width: #{$arrow_size + 1px};
+        margin-top: -#{$arrow_size + 1px};
+    }
+}
+
+@mixin nth_child_2n4_content {
+    float: left;
+    &:after,
+    &:before {
+        left: 100%;
+        top: 19px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    &:after {
+        border-color: transparent;
+        border-left-color: rgba(255, 255, 255, 1.0);
+        border-width: #{$arrow_size};
+        margin-top: -#{$arrow_size};
+    }
+    &:before {
+        border-color: transparent;
+        border-left-color: rgba(200, 200, 200, 1.0);
+        border-width: #{$arrow_size + 1px};
+        margin-top: -#{$arrow_size + 1px};
+    }
+}
+
+@mixin time_一 {
+    content: "一";
+    color: rgba(160, 160, 160, 1.0);
+    text-align: center;
+    width: 16px;
+    margin: 0px 2px;
+    display: inline-block;
+}
+
+@mixin time_datetime {
+    content: attr(data-time);
+    width: 100%;
+    position: absolute;
+    display: inline-block;
+    left: 0px;
+    bottom: 0;
+    font-size: 10px; // border: 1px solid #EFEF33;
+    color: rgba(160, 160, 160, 1.0);
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('/wwwroot/fonts/icomoon/icomoon.eot?sylmz2');
+    src: url('/wwwroot/fonts/icomoon/icomoon.eot?sylmz2#iefix') format('embedded-opentype'), url('/wwwroot/fonts/icomoon/icomoon.ttf?sylmz2') format('truetype'), url('/wwwroot/fonts/icomoon/icomoon.woff?sylmz2') format('woff'), url('/wwwroot/fonts/icomoon/icomoon.svg?sylmz2#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-google-plus2:before {
+    content: "\ea8c";
+}
+
+.icon-facebook2:before {
+    content: "\ea91";
+}
+
+.icon-instagram:before {
+    content: "\ea92";
+}
+
+* {
+    &,
+    &:after,
+    &:before {
+        vertical-align: top; // @include box-sizing(border-box);
+        // @include selection(rgba(150, 200, 255, 1), rgba(255, 255, 255, 1));
+        @include font-smoothing(antialiased);
+    }
+    box-sizing: border-box;
+}
+
+$avatar_size: 75px;
+$arrow_size: 10px;
+$i_width: 36px;
+$info_time_width: 120px;
+
+/*variable*/
+
+html {
+    height: 100%;
+    body {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        font-size: medium;
+        font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei";
+        background: white;
+        color: rgba(50, 50, 50, 0.8);
+        background-color: rgba(235, 235, 235, 0.5);
+        @include font-smoothing(antialiased);
+    }
+}
+
+#main {
+    display: inline-block;
+    max-width: 640px;
+    width: 100%;
+    background-color: rgba(50, 50, 50, 0.5);
+    text-align: center;
+    >* {
+        display: inline-block;
+    }
+    .avatar {
+        z-index: 2;
+        width: #{$avatar_size};
+        height: #{$avatar_size};
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+        img {
+            width: 100%;
+        }
+    }
+    #infos {
+        z-index: 1;
+        position: relative;
+        display: inline-block;
+        height: 100%;
+        min-height: 60px;
+        width: 100%;
+        background-color: rgba(235/0.7, 235/0.7, 235/0.7, 0.5);
+        padding-bottom: 40px * 2;
+        >* {
+            display: inline-block;
+        }
+        >i {
+            $i_width: 2px;
+            /*variable*/
+            height: calc(100% - 25px * 1.5);
+            width: #{$i_width};
+            position: absolute;
+            top: 0;
+            left: calc(50% - #{$i_width} /2);
+            z-index: 1;
+            &::before,
+            &::after {
+                display: inline-block;
+                content: '';
+                position: absolute;
+                background-color: rgba(255, 255, 255, 1.0);
+            }
+            /*線*/
+            &::before {
+                top: 0;
+                left: 0;
+                width: #{$i_width};
+                height: 100%;
+                box-shadow: 1px 1px #{$i_width} rgba(210,
+                210,
+                210,
+                1) inset;
+            }
+            /*球*/
+            &::after {
+                $i_after_width: 10px;
+                left: calc(50% - #{$i_after_width} / 2);
+                bottom: 0;
+                height: 10px;
+                width: #{$i_after_width};
+                display: inline-block;
+                border-radius: 50%;
+                box-shadow: 1px 1px #{$i_width} rgba(210,
+                210,
+                210,
+                1) inset;
+            }
+        }
+        >button {
+            position: absolute;
+            left: calc(50% - 80px / 2);
+            bottom: 0; // padding: 0.1rem 0.3rem;
+            padding: 0 11px;
+            border-radius: 5px;
+            font-size: 0.575rem;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            &:focus {
+                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+            }
+        }
+        .info {
+            z-index: 3;
+            width: 100%; // border: 1px solid red;
+            position: relative;
+            margin-top: 22px;
+            >* {
+                display: inline-block;
+            }
+            >time {
+                position: absolute;
+                top: 0;
+                height: #{$i_width + 4px};
+                width: #{$info_time_width}; // border: 1px solid yellow;
+                font-size: 13px;
+                padding-top: 4px;
+            }
+            >i {
+                position: absolute;
+                top: 0;
+                left: calc(50% - #{$i_width} / 2);
+                border-radius: 50%;
+                width: #{$i_width};
+                height: #{$i_width};
+                line-height: #{$i_width}; // border: 1px solid blue;
+                font-size: #{$i_width / 2};
+                background-color: rgba(223, 223, 223, 1);
+                box-shadow: 1px 1px 4px rgba(0, 0, 0, .4);
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
+                z-index: 1;
+                &:before {
+                    position: absolute;
+                    top: 0;
+                    left: 9px;
+                    color: white;
+                }
+                &.icon-google-plus2 {
+                    background-color: rgba(253, 96, 89, 1);
+                }
+                &.icon-facebook2 {
+                    background-color: rgba(254, 192, 61, 1);
+                }
+                &.icon-instagram {
+                    background-color: rgba(52, 204, 77, 1);
+                }
+            }
+            >.content {
+                // border: 1px solid green;
+                min-height: 50px;
+                background-color: rgba(255, 255, 255, 1.0);
+                border-radius: 3px;
+                box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .3);
+                z-index: 2;
+                position: relative;
+                img {
+                    // display: none;
+                    display: inline-block;
+                    width: 52px;
+                    height: 52px;
+                    margin-top: 8px;
+                    margin-left: 12px;
+                    border-radius: 10px;
+                }
+                >*:not(img) {
+                    display: inline-block;
+                    text-align: left;
+                    width: calc(100% - (52px + 16px));
+                    margin: 0;
+                }
+                >h3,
+                p {
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+                h3 {
+                    margin-top: 12px;
+                    height: 45px;
+                    line-height: 45px;
+                    padding: 0 16px;
+                    font-size: 1.0em;
+                }
+                p {
+                    padding: 0 16px;
+                    font-size: 13px;
+                }
+                button {
+                    font-size: 12px;
+                    text-align: right;
+                    height: 35px;
+                    width: 100%;
+                    padding-right: 16px;
+                    margin-top: 16px;
+                    border-top: 1px solid rgba(222, 222, 222, 1.0);
+                }
+            }
+        }
+    }
+}
+
+
+/*RWO*/
+
+@include range-width(0,
+400px) {
+    #main {
+        text-align: left;
+        .avatar {
+            left: 90px+#{$avatar_size} /2;
+        }
+        #infos {
+            >button {
+                left: 90px+#{$avatar_size} /2;
+            }
+            .info {
+                padding-top: 40px;
+                margin-top: 32px;
+                +.info {
+                    margin-top: 48px;
+                }
+                >time {
+                    left: calc(50% - #{$info_time_width} / 2);
+                    text-align: center;
+                }
+                >i {
+                    top: 25px;
+                    left: calc(50% - #{$i_width} / 2);
+                    z-index: 6;
+                }
+                >.content {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@include range-width(400px,
+600px) {
+    #main {
+        text-align: left;
+        .avatar {
+            margin-left: 90px;
+        }
+        #infos {
+            >i {
+                left: 90px+#{$avatar_size} /2;
+            }
+            >button {
+                left: 90px;
+            }
+            .info {
+                >i {
+                    left: 90px + 36px / 2;
+                }
+                /*這裡卡很久*/
+                >.content {
+                    // left: 158px; ////多於ㄉ設定
+                    width: calc(100% - #{$avatar_size}/2 - #{$info_time_width});
+                }
+                &:nth-child(2n+3),
+                &:nth-child(2n+4) {
+                    >time {
+                        left: -(36px / 2);
+                        text-align: right;
+                        /*這段重複*/
+                        &:after {
+                            @include time_一;
+                        }
+                        &:before {
+                            @include time_datetime;
+                        }
+                    }
+                    >.content {
+                        @include nth_child_2n3_content;
+                    }
+                }
+                &:nth-child(2n+4) {
+                    // background-color: black;
+                }
+            }
+        }
+    }
+}
+
+@include range-width(600px) {
+    #main {
+        .avatar {}
+        #infos {
+            .info {
+                >.content {
+                    width: calc(50% - #{$i_width + 10px} / 2);
+                }
+                &:nth-child(2n+3) {
+                    >time {
+                        text-align: right;
+                        left: calc(50% - #{$i_width} / 2 - #{$info_time_width} - 8px);
+                        &:after {
+                            content: "一";
+                            color: rgba(160, 160, 160, 1.0);
+                            text-align: center;
+                            width: 16px;
+                            margin: 0px 2px;
+                            display: inline-block;
+                        }
+                        &:before {
+                            content: attr(data-time);
+                            width: 100%;
+                            position: absolute;
+                            display: inline-block;
+                            left: 0px;
+                            bottom: 0;
+                            font-size: 10px; // border: 1px solid #EFEF33;
+                            color: rgba(160, 160, 160, 1.0);
+                        }
+                    }
+                    >.content {
+                        @include nth_child_2n3_content;
+                    }
+                }
+                &:nth-child(2n+4) {
+                    >time {
+                        text-align: left;
+                        right: calc(50% - #{$i_width} / 2 - #{$info_time_width} - 8px);
+                        &:before {
+                            @include time_一;
+                        }
+                        &:after {
+                            @include time_datetime;
+                        }
+                    }
+                    >.content {
+                        @include nth_child_2n4_content;
+                    }
+                }
+            }
+        }
+    }
+}
